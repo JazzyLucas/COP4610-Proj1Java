@@ -71,7 +71,10 @@ class ProducerConsumer extends Thread {
             synchronized (this)
             {
                 while (sharedData.size() == capacity)
+                {
+                    System.out.println("sharedData is full");
                     wait();
+                }
 
                 data+=1;
                 sharedData.add(data);
@@ -93,7 +96,11 @@ class ProducerConsumer extends Thread {
                 // consumer thread waits while list
                 // is empty
                 while (sharedData.size() == 0)
+                {
+                    System.out.println("sharedData is empty");
                     wait();
+                }
+
 
                 int data = sharedData.remove(0);
                 System.out.println("Consumer removed: " + data);
